@@ -1,48 +1,51 @@
 package ex3;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+/**
+ * Représenter un zoo contenant des animaux.
+ */
 public class Zoo {
 
     private String nom;
-    private List<String> types;
-    private List<String> noms;
-    private List<String> comportements;
+    private final List<Animal> animaux;
 
     public Zoo(String nom) {
         this.nom = nom;
+        this.animaux = new ArrayList<>();
     }
 
+    /**
+     * Ajouter un animal au zoo.
+     *
+     * @param nomAnimal nom de l'animal
+     * @param typeAnimal type (ex: MAMMIFERE, POISSON...)
+     * @param comportement comportement (ex: HERBIVORE, CARNIVORE...)
+     */
     public void addAnimal(String nomAnimal, String typeAnimal, String comportement) {
-        types.add(typeAnimal);
-        noms.add(nomAnimal);
-        comportements.add(comportement);
+        animaux.add(new Animal(nomAnimal, typeAnimal, comportement));
     }
 
     public void afficherListeAnimaux() {
-        for (int i = 0; i < types.size(); i++) {
-            System.out.println(noms.get(i) + " " + types.get(i) + " " + comportements.get(i));
+        for (Animal a : animaux) {
+            System.out.println(a.getNom() + " " + a.getType() + " " + a.getComportement());
         }
     }
 
     public int taille() {
-        return types.size();
+        return animaux.size();
     }
 
-    /**
-     * Getter for nom
-     *
-     * @return the nom
-     */
+    public List<Animal> getAnimaux() {
+        return Collections.unmodifiableList(animaux);
+    }
+
     public String getNom() {
         return nom;
     }
 
-    /**
-     * Setter
-     *
-     * @param nom the nom to set
-     */
     public void setNom(String nom) {
         this.nom = nom;
     }
